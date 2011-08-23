@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	package="com.steelbison.nbn" android:versionCode="1"
+	android:versionName="1.0">
+	<uses-sdk android:targetSdkVersion="10" android:minSdkVersion="10" />
+
+	<application android:icon="@drawable/icon" android:label="@string/app_name">
+		<activity android:name="com.steelbison.nbn.NewbornNewsActivity"
+			android:label="@string/app_name">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity>
+		<activity android:name="com.steelbison.nbn.BabyActivity" android:label="@string/app_name"
+          android:theme="@android:style/Theme.NoTitleBar">
+		</activity>
+		<activity android:name="com.steelbison.nbn.BabyEatActivity" 
+			android:label="@string/app_name">
+		</activity>
+		<activity android:name="com.steelbison.nbn.BabyPoopActivity" 
+			android:label="@string/app_name">
+		</activity>
+		<activity android:name="com.steelbison.nbn.BabySleepActivity"
+			android:label="@string/app_name">
+		</activity>
+		<activity android:name="com.steelbison.nbn.MomActivity" android:label="@string/app_name"
+          android:theme="@android:style/Theme.NoTitleBar">
+		</activity>
+		<activity android:name="com.steelbison.nbn.MomMedsActivity"
+			android:label="@string/app_name">
+		</activity>
+		<activity android:name="com.steelbison.nbn.MomPumpActivity"
+			android:label="@string/app_name">
+		</activity>
+		<activity android:name="com.steelbison.nbn.LogActivity"
+			android:label="@string/app_name">
+		</activity>
+	</application>
+</manifest>

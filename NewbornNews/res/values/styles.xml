@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<style name="BabyBlue">
+		<item name="android:textColor">#000000</item>
+		<item name="android:background">#89CFFD</item>
+	</style>
+	<style name="BabyPink">
+		<item name="android:textColor">#000000</item>
+		<item name="android:background">#F4C2C2</item>
+	</style>
+	<style name="PaleYellow">
+		<item name="android:textColor">#000000</item>
+		<item name="android:background">#FFFF99</item>
+	</style>
+</resources>

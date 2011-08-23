@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<TextView style="@style/BabyBlue" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:text="@string/baby" />
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:orientation="horizontal" style="@style/BabyBlue">
+		<Button android:id="@+id/eat" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:onClick="onBabyClick"
+			android:text="@string/eat" />
+		<Button android:id="@+id/sleep" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:onClick="onBabyClick"
+			android:text="@string/sleep" />
+		<Button android:id="@+id/poop" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:onClick="onBabyClick"
+			android:text="@string/poop" />
+	</LinearLayout>
+	<TextView style="@style/BabyPink" android:text="@string/mom"
+		android:layout_width="fill_parent" android:layout_height="wrap_content" />
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:orientation="horizontal" style="@style/BabyPink">
+		<Button android:id="@+id/meds" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:onClick="onMomClick"
+			android:text="@string/meds" />
+		<Button android:id="@+id/pump" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:onClick="onMomClick"
+			android:text="@string/pump" />
+	</LinearLayout>
+	<TextView style="@style/PaleYellow" android:text="@string/log"
+		android:id="@+id/log" android:layout_height="fill_parent"
+		android:layout_width="fill_parent" android:clickable="true"
+		android:onClick="onLogClick" />
+</LinearLayout>

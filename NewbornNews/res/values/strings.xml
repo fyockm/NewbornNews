@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NewbornNews</string>
+    <string name="baby">Baby</string>
+    <string name="mom">Mom</string>
+    <string name="log">Log</string>
+    <string name="eat">Eat</string>
+    <string name="sleep">Sleep</string>
+    <string name="poop">Poop</string>
+    <string name="meds">Meds</string>
+    <string name="pump">Pump</string>
+    
+    <string name="no_data">No Data</string>
+</resources>
