@@ -1,4 +1,4 @@
-package com.steelbison.nbn;
+package com.steelbison.nbn.activity;
 
 import android.app.ListActivity;
 import android.os.Bundle;
