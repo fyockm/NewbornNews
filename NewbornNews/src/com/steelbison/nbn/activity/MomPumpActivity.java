@@ -1,19 +1,16 @@
 package com.steelbison.nbn.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.widget.TextView;
 
-public class MomPumpActivity extends Activity {
+public class MomPumpActivity extends DateTimeActivity {
 
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.pump);
 
-		TextView textview = new TextView(this);
-        textview.setText("This is the Pump tab");
-        setContentView(textview);
+		setStartButtons();
+		setStopButtons();
 	}
-
 }

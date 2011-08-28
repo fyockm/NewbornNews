@@ -24,7 +24,7 @@
 			android:label="@string/app_name" android:theme="@android:style/Theme.NoTitleBar" />
 		<activity android:name="com.steelbison.nbn.activity.MomMedsActivity"
 			android:label="@string/meds" />
-		<activity android:name="com.steelbison.nbn.MomPumpActivity"
+		<activity android:name="com.steelbison.nbn.activity.MomPumpActivity"
 			android:label="@string/pump" />
 		<activity android:name="com.steelbison.nbn.activity.LogActivity"
 			android:label="@string/log" />
