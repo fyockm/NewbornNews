@@ -22,5 +22,7 @@
     <string name="wet">Wet</string>
     <string name="dirty">Dirty</string>
         
-    <string name="no_data">No Data</string>
+    <string name="no_news">No News</string>
+    
+    <string name="confirm">Confirm</string>
 </resources>

@@ -2,11 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical" android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
+
 	<TextView style="@style/BabyBlue" android:layout_width="fill_parent"
 		android:layout_height="wrap_content" android:text="@string/baby" />
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	<LinearLayout android:orientation="horizontal"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:orientation="horizontal" style="@style/BabyBlue">
+		style="@style/BabyBlue">
 		<Button android:id="@+id/eat" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:onClick="onBabyClick"
 			android:text="@string/eat" />
@@ -17,11 +18,12 @@
 			android:layout_height="wrap_content" android:onClick="onBabyClick"
 			android:text="@string/poop" />
 	</LinearLayout>
+
 	<TextView style="@style/BabyPink" android:text="@string/mom"
 		android:layout_width="fill_parent" android:layout_height="wrap_content" />
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	<LinearLayout android:orientation="horizontal"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:orientation="horizontal" style="@style/BabyPink">
+		style="@style/BabyPink">
 		<Button android:id="@+id/meds" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:onClick="onMomClick"
 			android:text="@string/meds" />
@@ -29,8 +31,14 @@
 			android:layout_height="wrap_content" android:onClick="onMomClick"
 			android:text="@string/pump" />
 	</LinearLayout>
-	<TextView style="@style/PaleYellow" android:text="@string/log"
-		android:id="@+id/log" android:layout_height="fill_parent"
-		android:layout_width="fill_parent" android:clickable="true"
-		android:onClick="onLogClick" />
+
+	<LinearLayout android:layout_width="wrap_content"
+		android:layout_height="fill_parent" style="@style/PaleYellow">
+		<ListView android:id="@+id/android:list"
+			android:layout_width="wrap_content" android:layout_height="wrap_content" />
+		<TextView android:id="@+id/android:empty"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:text="@string/no_news" />
+	</LinearLayout>
+
 </LinearLayout>
