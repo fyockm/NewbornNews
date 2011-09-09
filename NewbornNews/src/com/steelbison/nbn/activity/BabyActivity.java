@@ -12,8 +12,7 @@ public class BabyActivity extends NbnTabActivity {
 		setTab(BabyEatActivity.class, R.string.eat, R.drawable.ic_tab_bottle);
 		setTab(BabySleepActivity.class, R.string.sleep,
 				R.drawable.ic_tab_bottle);
-		setTab(BabyPoopActivity.class, R.string.poop,
-				R.drawable.ic_tab_bottle);
+		setTab(BabyPoopActivity.class, R.string.poop, R.drawable.ic_tab_bottle);
 
 		setCurrentTab();
 	}

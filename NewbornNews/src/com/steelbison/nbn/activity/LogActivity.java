@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.steelbison.nbn.dao.NbnDb;
 import com.steelbison.nbn.dao.NbnDbAdapter;
+import com.steelbison.nbn.dao.News;
 
 public class LogActivity extends Activity {
 
@@ -32,9 +32,9 @@ public class LogActivity extends Activity {
 
 		Bundle extras = getIntent().getExtras();
 		mRowId = (bundle == null) ? null : (Long) bundle
-				.getSerializable(NbnDb._ID);
+				.getSerializable(NbnDbAdapter._ID);
 		if (extras != null) {
-			mRowId = extras.getLong(NbnDb._ID);
+			mRowId = extras.getLong(NbnDbAdapter._ID);
 		}
 		populateFields();
 		confirmButton.setOnClickListener(new View.OnClickListener() {
@@ -52,7 +52,7 @@ public class LogActivity extends Activity {
 			startManagingCursor(cursor);
 
 			// String category = cursor.getString(cursor
-			// .getColumnIndexOrThrow(NbnDb.START));
+			// .getColumnIndexOrThrow(News.START));
 			// for (int i = 0; i < mCategory.getCount(); i++) {
 			//
 			// String s = (String) mCategory.getItemAtPosition(i);
@@ -63,16 +63,16 @@ public class LogActivity extends Activity {
 			// }
 
 			mTitleText.setText(cursor.getInt(cursor
-					.getColumnIndexOrThrow(NbnDb.TYPE)));
+					.getColumnIndexOrThrow(NbnDbAdapter.TYPE)));
 			mBodyText.setText(cursor.getString(cursor
-					.getColumnIndexOrThrow(NbnDb.NOTE)));
+					.getColumnIndexOrThrow(NbnDbAdapter.NOTE)));
 		}
 	}
 
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		saveState();
-		outState.putSerializable(NbnDb._ID, mRowId);
+		outState.putSerializable(NbnDbAdapter._ID, mRowId);
 	}
 
 	@Override
@@ -89,16 +89,19 @@ public class LogActivity extends Activity {
 
 	private void saveState() {
 		// String category = (String) mCategory.getSelectedItem();
-		Integer summary = mTitleText.getText().length();
+		int summary = Integer.parseInt(mTitleText.getText().toString());
 		String description = mBodyText.getText().toString();
+		News news = new News();
+		news.type = summary;
+		news.note = description;
 
 		if (mRowId == null) {
-			long id = mDbAdapter.createNews(summary, 0, 0, description);
+			long id = mDbAdapter.createNews(news);
 			if (id > 0) {
 				mRowId = id;
 			}
 		} else {
-			mDbAdapter.updateNews(mRowId, summary, 0, 0, description);
+			mDbAdapter.updateNews(news);
 		}
 	}
 }

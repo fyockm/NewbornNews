@@ -33,12 +33,6 @@ public class NbnTabActivity extends TabActivity {
 	}
 
 	protected void setCurrentTab() {
-		int tab;
-		try {
-			tab = Integer.parseInt(extras.getString("tab"));
-		} catch (NumberFormatException nfe) {
-			tab = 0;
-		}
-		tabHost.setCurrentTab(tab);
+		tabHost.setCurrentTab(extras.getInt("tab", 0));
 	}
 }

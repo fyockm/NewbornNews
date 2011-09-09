@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
-import com.steelbison.nbn.dao.NbnDb;
 import com.steelbison.nbn.dao.NbnDbAdapter;
 
 public class NewbornNewsActivity extends ListActivity {
@@ -33,13 +32,13 @@ public class NewbornNewsActivity extends ListActivity {
 		Intent intent = new Intent(getApplicationContext(), BabyActivity.class);
 		switch (v.getId()) {
 		case R.id.eat:
-			intent.putExtra("tab", "0");
+			intent.putExtra("tab", 0);
 			break;
 		case R.id.sleep:
-			intent.putExtra("tab", "1");
+			intent.putExtra("tab", 1);
 			break;
 		case R.id.poop:
-			intent.putExtra("tab", "2");
+			intent.putExtra("tab", 2);
 			break;
 		}
 		startActivity(intent);
@@ -49,10 +48,10 @@ public class NewbornNewsActivity extends ListActivity {
 		Intent intent = new Intent(getApplicationContext(), MomActivity.class);
 		switch (v.getId()) {
 		case R.id.meds:
-			intent.putExtra("tab", "0");
+			intent.putExtra("tab", 0);
 			break;
 		case R.id.pump:
-			intent.putExtra("tab", "1");
+			intent.putExtra("tab", 1);
 			break;
 		}
 		startActivity(intent);
@@ -63,7 +62,7 @@ public class NewbornNewsActivity extends ListActivity {
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 		Intent i = new Intent(this, LogActivity.class);
-		i.putExtra(NbnDb._ID, id);
+		i.putExtra(NbnDbAdapter._ID, id);
 
 		// Activity returns an result if called with startActivityForResult
 		startActivityForResult(i, ACTIVITY_EDIT);
@@ -83,7 +82,7 @@ public class NewbornNewsActivity extends ListActivity {
 		cursor = dbHelper.fetchAllNews();
 		startManagingCursor(cursor);
 
-		String[] from = new String[] { NbnDb.TYPE };
+		String[] from = new String[] { NbnDbAdapter._ID };
 		int[] to = new int[] { R.id.news };
 
 		// Now create an array adapter and set it to display using our rows

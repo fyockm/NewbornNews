@@ -1,65 +1,66 @@
 package com.steelbison.nbn.activity;
 
 import java.text.DateFormat;
+import java.util.Calendar;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 
-import com.steelbison.widget.DateTimeButton;
-
 public class DateTimeActivity extends Activity {
-	protected DateTimeButton mStartDate;
-	protected DateTimeButton mStopDate;
-	protected DateTimeButton mStartTime;
-	protected DateTimeButton mStopTime;
+	private DateTimeButton mStartDate;
+	private DateTimeButton mStopDate;
+	private DateTimeButton mStartTime;
+	private DateTimeButton mStopTime;
 
-	protected DateFormat mDateFormat;
-	protected DateFormat mTimeFormat;
+	private class DateTimeButton {
+		public Button button;
+		public DateFormat dateFormat;
+		public Calendar cal;
 
-	/** Called when the activity is first created. */
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+		public static final int DATE = 0;
+		public static final int TIME = 1;
 
-		mDateFormat = android.text.format.DateFormat
-				.getDateFormat(getApplicationContext());
-		mTimeFormat = android.text.format.DateFormat
-				.getTimeFormat(getApplicationContext());
+		public DateTimeButton(final int id, int type) {
+			this.button = (Button) findViewById(id);
+			this.button.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					showDialog(id);
+				}
+			});
+			setButtonText();
+
+			switch (type) {
+			case DATE:
+				this.dateFormat = android.text.format.DateFormat
+						.getDateFormat(getApplicationContext());
+			case TIME:
+				this.dateFormat = android.text.format.DateFormat
+						.getTimeFormat(getApplicationContext());
+			}
+
+			this.cal = Calendar.getInstance();
+		}
+
+		public void setButtonText() {
+			this.button.setText(dateFormat.format(cal.getTime()));
+		}
 	}
 
 	protected void setStartButtons() {
-		mStartDate = getDateTimeButton(R.id.startDate, mDateFormat);
-		mStartTime = getDateTimeButton(R.id.startTime, mTimeFormat);
+		mStartDate = new DateTimeButton(R.id.startDate, DateTimeButton.DATE);
+		mStartTime = new DateTimeButton(R.id.startTime, DateTimeButton.TIME);
 	}
 
 	protected void setStopButtons() {
-		mStopDate = getDateTimeButton(R.id.stopDate, mDateFormat);
-		mStopTime = getDateTimeButton(R.id.stopTime, mTimeFormat);
-	}
-
-	private DateTimeButton getDateTimeButton(int id, DateFormat dateFormat) {
-		DateTimeButton dtb = new DateTimeButton((Button) findViewById(id),
-				dateFormat);
-		dtb.getButton().setOnClickListener(getOnClickListener(id));
-		dtb.setButtonText();
-		return dtb;
-	}
-
-	private View.OnClickListener getOnClickListener(final int id) {
-		View.OnClickListener ocl = new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				showDialog(id);
-			}
-		};
-		return ocl;
+		mStopDate = new DateTimeButton(R.id.stopDate, DateTimeButton.DATE);
+		mStopTime = new DateTimeButton(R.id.stopTime, DateTimeButton.TIME);
 	}
 
 	@Override
@@ -67,10 +68,10 @@ public class DateTimeActivity extends Activity {
 		switch (id) {
 		case R.id.startDate:
 			return getDatePickerDialog(mStartDate);
-		case R.id.stopDate:
-			return getDatePickerDialog(mStopDate);
 		case R.id.startTime:
 			return getTimePickerDialog(mStartTime);
+		case R.id.stopDate:
+			return getDatePickerDialog(mStopDate);
 		case R.id.stopTime:
 			return getTimePickerDialog(mStopTime);
 		}
@@ -81,22 +82,23 @@ public class DateTimeActivity extends Activity {
 		DatePickerDialog.OnDateSetListener odsl = new DatePickerDialog.OnDateSetListener() {
 			public void onDateSet(DatePicker view, int year, int monthOfYear,
 					int dayOfMonth) {
-				dtb.setCal(year, monthOfYear, dayOfMonth);
+				dtb.cal.set(year, monthOfYear, dayOfMonth);
 				dtb.setButtonText();
 			}
 		};
-		return new DatePickerDialog(this, odsl, dtb.getYear(), dtb.getMonth(),
-				dtb.getDay());
+		return new DatePickerDialog(this, odsl, dtb.cal.get(Calendar.YEAR),
+				dtb.cal.get(Calendar.MONTH), dtb.cal.get(Calendar.DAY_OF_MONTH));
 	}
 
 	private TimePickerDialog getTimePickerDialog(final DateTimeButton dtb) {
 		TimePickerDialog.OnTimeSetListener otsl = new TimePickerDialog.OnTimeSetListener() {
 			public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-				dtb.setCal(hourOfDay, minute);
+				dtb.cal.set(Calendar.HOUR_OF_DAY, hourOfDay);
+				dtb.cal.set(Calendar.MINUTE, minute);
 				dtb.setButtonText();
 			}
 		};
-		return new TimePickerDialog(this, otsl, dtb.getHour(), dtb.getMinute(),
-				false);
+		return new TimePickerDialog(this, otsl, dtb.cal
+				.get(Calendar.HOUR_OF_DAY), dtb.cal.get(Calendar.MINUTE), false);
 	}
 }
