@@ -35,12 +35,12 @@ public class NbnDbAdapter implements BaseColumns {
 	private static final String DATABASE_CREATE = "CREATE TABLE "
 			+ DATABASE_TABLE + " (" + _ID
 			+ " INTEGER primary key autoincrement, " + TYPE + " int not null,"
-			+ START + " int, " + STOP + " int, " + BREAST + " int, " + BOTTLE
-			+ " int, " + SIDE + " int, " + OZ + " int, " + WET + " int, "
-			+ DIRTY + " int, " + NOTE + " VARCHAR(50));";
+			+ START + " int, " + STOP + " int, " + BREAST + " boolean, "
+			+ BOTTLE + " boolean, " + SIDE + " int, " + OZ + " int, " + WET
+			+ " boolean, " + DIRTY + " boolean, " + NOTE + " VARCHAR(50));";
 
 	private static final String DATABASE_DROP = "DROP TABLE IF EXISTS "
-			+ DATABASE_NAME;
+			+ DATABASE_TABLE;
 
 	// private static final String DEFAULT_SORT_ORDER = "modified DESC";
 
@@ -133,9 +133,13 @@ public class NbnDbAdapter implements BaseColumns {
 		return mCursor;
 	}
 
-	private String[] getNewsColumns() {
+	public static String[] getNewsColumns() {
 		return new String[] { _ID, TYPE, START, STOP, BREAST, BOTTLE, SIDE, OZ,
 				WET, DIRTY, NOTE };
+	}
+
+	public static String[] getNewsListColumns() {
+		return new String[] { TYPE, START, STOP, NOTE };
 	}
 
 	/**

@@ -9,9 +9,9 @@
 		<TextView android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:text="@string/start" />
 		<Button android:id="@+id/startDate" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" />
+			android:layout_height="wrap_content" android:onClick="onDateTimeClick" />
 		<Button android:id="@+id/startTime" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" />
+			android:layout_height="wrap_content" android:onClick="onDateTimeClick" />
 	</LinearLayout>
 
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -20,9 +20,9 @@
 		<TextView android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:text="@string/stop" />
 		<Button android:id="@+id/stopDate" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" />
+			android:layout_height="wrap_content" android:onClick="onDateTimeClick" />
 		<Button android:id="@+id/stopTime" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" />
+			android:layout_height="wrap_content" android:onClick="onDateTimeClick" />
 	</LinearLayout>
 
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -34,10 +34,10 @@
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:orientation="horizontal">
 			<RadioButton android:layout_width="wrap_content"
-				android:id="@+id/left" android:layout_height="wrap_content"
+				android:id="@+id/breastLeft" android:layout_height="wrap_content"
 				android:text="@string/left" android:checked="true" />
 			<RadioButton android:layout_width="wrap_content"
-				android:id="@+id/right" android:layout_height="wrap_content"
+				android:id="@+id/breastRight" android:layout_height="wrap_content"
 				android:text="@string/right" />
 		</RadioGroup>
 	</LinearLayout>
@@ -50,14 +50,18 @@
 			android:paddingRight="10dp" />
 
 		<EditText android:layout_height="wrap_content"
-			android:layout_width="50dp" android:id="@+id/ounces" />
+			android:layout_width="50dp" android:id="@+id/ounces" android:numeric="integer" />
 		<TextView android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:text="@string/ounces"
 			android:paddingLeft="3dp" />
 	</LinearLayout>
 
 	<TextView android:layout_width="wrap_content"
-		android:layout_height="wrap_content" android:text="@string/notes" />
+		android:layout_height="wrap_content" android:text="@string/note" />
 	<EditText android:layout_height="wrap_content"
-		android:layout_width="match_parent" android:id="@+id/notes" />
+		android:layout_width="match_parent" android:id="@+id/note" />
+
+	<Button android:id="@+id/confirm" android:text="@string/confirm"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:onClick="onConfirm" />
 </LinearLayout>
