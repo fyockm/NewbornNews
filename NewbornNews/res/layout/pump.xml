@@ -1,57 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical" android:layout_width="match_parent"
-	android:layout_height="match_parent" android:weightSum="1">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent" android:layout_height="match_parent">
 
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		android:orientation="horizontal" android:layout_width="match_parent"
-		android:layout_height="wrap_content">
-		<TextView android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:text="@string/start" />
-		<Button android:id="@+id/startDate" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:onClick="onDateTimeClick" />
-		<Button android:id="@+id/startTime" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:onClick="onDateTimeClick" />
-	</LinearLayout>
+	<Button android:id="@+id/startNow" android:onClick="onNowClick"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:text="@string/start" android:layout_alignParentTop="true" />
+	<Button android:id="@+id/startDate" android:onClick="onDateTimeClick"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:layout_toRightOf="@id/startNow" />
+	<Button android:id="@+id/startTime" android:onClick="onDateTimeClick"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:layout_toRightOf="@id/startDate" />
 
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		android:orientation="horizontal" android:layout_width="match_parent"
-		android:layout_height="wrap_content">
-		<TextView android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:text="@string/stop" />
-		<Button android:id="@+id/stopDate" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:onClick="onDateTimeClick" />
-		<Button android:id="@+id/stopTime" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:onClick="onDateTimeClick" />
-	</LinearLayout>
+	<Button android:id="@+id/stopNow" android:onClick="onNowClick"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:text="@string/stop" android:layout_below="@id/startNow" />
+	<Button android:id="@+id/stopDate" android:onClick="onDateTimeClick"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:layout_below="@id/startDate" android:layout_alignLeft="@id/startDate" />
+	<Button android:id="@+id/stopTime" android:onClick="onDateTimeClick"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:layout_toRightOf="@id/stopDate" android:layout_alignBaseline="@id/stopDate" />
 
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		android:orientation="horizontal" android:layout_width="match_parent"
-		android:layout_height="wrap_content">
-		<RadioGroup android:id="@+id/breastSide"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:orientation="horizontal">
-			<RadioButton android:layout_width="wrap_content"
-				android:id="@+id/left" android:layout_height="wrap_content"
-				android:text="@string/left" android:checked="true" />
-			<RadioButton android:layout_width="wrap_content"
-				android:id="@+id/right" android:layout_height="wrap_content"
-				android:text="@string/right" android:paddingRight="10dp" />
-		</RadioGroup>
-
-		<EditText android:layout_height="wrap_content"
-			android:layout_width="50dp" android:id="@+id/ounces" />
-		<TextView android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:text="@string/ounces"
-			android:paddingLeft="3dp" />
-	</LinearLayout>
+	<RadioGroup android:id="@+id/side" android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:orientation="horizontal"
+		android:layout_below="@id/stopDate">
+		<RadioButton android:id="@+id/breastLeft" android:text="@string/left"
+			android:paddingRight="10dp" />
+		<RadioButton android:id="@+id/breastRight" android:text="@string/right" />
+	</RadioGroup>
+	<EditText android:id="@+id/ounces" android:layout_height="wrap_content"
+		android:layout_width="50dp" android:layout_below="@id/side" />
 
 	<TextView android:layout_width="wrap_content"
-		android:layout_height="wrap_content" android:text="@string/note" />
-	<EditText android:layout_height="wrap_content"
-		android:layout_width="match_parent" android:id="@+id/note" />
+		android:layout_height="wrap_content" android:text="@string/ounces"
+		android:paddingLeft="3dp" android:layout_toRightOf="@id/ounces"
+		android:layout_alignBaseline="@id/ounces" />
+
+	<TextView android:id="@+id/noteText" android:text="@string/note"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:layout_below="@id/ounces" />
+	<EditText android:id="@+id/note" android:layout_height="wrap_content"
+		android:layout_width="match_parent" android:layout_below="@id/noteText" />
 
 	<Button android:id="@+id/confirm" android:text="@string/confirm"
 		android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:onClick="onConfirm" />
-</LinearLayout>
+		android:onClick="onConfirm" android:layout_alignParentBottom="true"
+		android:layout_alignParentRight="true" />
+</RelativeLayout>

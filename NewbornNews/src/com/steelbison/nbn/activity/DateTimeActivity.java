@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TimePicker;
 
 import com.steelbison.nbn.dao.NbnDbAdapter;
@@ -20,7 +21,7 @@ import com.steelbison.nbn.dao.News;
 public class DateTimeActivity extends Activity {
 	protected DateTimeButton mStart;
 	protected DateTimeButton mStop;
-	// protected Button mConfirm;
+	protected EditText mNote;
 
 	public DateFormat mDateFormat;
 	public DateFormat mTimeFormat;
@@ -63,22 +64,13 @@ public class DateTimeActivity extends Activity {
 		mStop = new DateTimeButton(R.id.stopDate, R.id.stopTime);
 	}
 
-	// protected void setConfirmButton() {
-	// mConfirm = (Button) findViewById(R.id.confirm);
-	// }
-
-	protected void populateFields() {
+	protected void populateNews() {
 		if (mRowId != null) {
 			Cursor cursor = mDbAdapter.fetchNews(mRowId);
 			startManagingCursor(cursor);
 
 			mNews = new News();
 			mNews.getNews(cursor);
-
-			mStart.cal.setTimeInMillis(mNews.start);
-			mStart.setButtonText();
-			mStop.cal.setTimeInMillis(mNews.stop);
-			mStop.setButtonText();
 		}
 	}
 
@@ -119,6 +111,17 @@ public class DateTimeActivity extends Activity {
 
 	public void onDateTimeClick(View v) {
 		showDialog(v.getId());
+	}
+
+	public void onNowClick(View v) {
+		switch (v.getId()) {
+		case R.id.startNow:
+			setStartButtons();
+			break;
+		case R.id.stopNow:
+			setStopButtons();
+			break;
+		}
 	}
 
 	public void onConfirm(View view) {

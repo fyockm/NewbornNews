@@ -1,36 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical" android:layout_width="match_parent"
-	android:layout_height="match_parent" android:weightSum="1">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent" android:layout_height="match_parent">
 
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		android:orientation="horizontal" android:layout_width="match_parent"
-		android:layout_height="wrap_content">
-		<TextView android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:text="@string/start" />
-		<Button android:id="@+id/startDate" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:onClick="onDateTimeClick" />
-		<Button android:id="@+id/startTime" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:onClick="onDateTimeClick" />
-	</LinearLayout>
+	<Button android:id="@+id/startNow" android:onClick="onNowClick"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:text="@string/start" android:layout_alignParentTop="true" />
+	<Button android:id="@+id/startDate" android:onClick="onDateTimeClick"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:layout_toRightOf="@id/startNow" />
+	<Button android:id="@+id/startTime" android:onClick="onDateTimeClick"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:layout_toRightOf="@id/startDate" />
 
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		android:orientation="horizontal" android:layout_width="match_parent"
-		android:layout_height="wrap_content">
-		<TextView android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:text="@string/stop" />
-		<Button android:id="@+id/stopDate" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:onClick="onDateTimeClick" />
-		<Button android:id="@+id/stopTime" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:onClick="onDateTimeClick" />
-	</LinearLayout>
+	<Button android:id="@+id/stopNow" android:onClick="onNowClick"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:text="@string/stop" android:layout_below="@id/startNow" />
+	<Button android:id="@+id/stopDate" android:onClick="onDateTimeClick"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:layout_below="@id/startDate" android:layout_alignLeft="@id/startDate" />
+	<Button android:id="@+id/stopTime" android:onClick="onDateTimeClick"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:layout_toRightOf="@id/stopDate" android:layout_alignBaseline="@id/stopDate" />
 
-	<TextView android:layout_width="wrap_content"
-		android:layout_height="wrap_content" android:text="@string/note" />
-	<EditText android:layout_width="match_parent" android:id="@+id/note"
-		android:layout_height="wrap_content" />
+	<TextView android:id="@+id/noteText" android:text="@string/note"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:layout_below="@id/stopNow" />
+	<EditText android:id="@+id/note" android:layout_height="wrap_content"
+		android:layout_width="match_parent" android:layout_below="@id/noteText" />
 
 	<Button android:id="@+id/confirm" android:text="@string/confirm"
 		android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:onClick="onConfirm" />
-</LinearLayout>
+		android:onClick="onConfirm" android:layout_alignParentBottom="true"
+		android:layout_alignParentRight="true" />
+</RelativeLayout>

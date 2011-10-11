@@ -18,26 +18,25 @@ public class NbnDbAdapter implements BaseColumns {
 
 	private static final String DATABASE_NAME = "newbornnews";
 	private static final String DATABASE_TABLE = "news";
-	private static final int DATABASE_VERSION = 2;
+	private static final int DATABASE_VERSION = 4;
 
 	// columns
 	public static final String TYPE = "type";
 	public static final String START = "start";
 	public static final String STOP = "stop";
-	public static final String BREAST = "breast";
-	public static final String BOTTLE = "bottle";
 	public static final String SIDE = "side";
-	public static final String OZ = "oz";
+	public static final String AMT = "amt";
 	public static final String WET = "wet";
 	public static final String DIRTY = "dirty";
+	public static final String MEDS = "meds";
 	public static final String NOTE = "note";
 
 	private static final String DATABASE_CREATE = "CREATE TABLE "
 			+ DATABASE_TABLE + " (" + _ID
 			+ " INTEGER primary key autoincrement, " + TYPE + " int not null,"
-			+ START + " int, " + STOP + " int, " + BREAST + " boolean, "
-			+ BOTTLE + " boolean, " + SIDE + " int, " + OZ + " int, " + WET
-			+ " boolean, " + DIRTY + " boolean, " + NOTE + " VARCHAR(50));";
+			+ START + " int, " + STOP + " int, " + SIDE + " int, " + AMT
+			+ " dec, " + WET + " boolean, " + DIRTY + " boolean, " + MEDS
+			+ " text, " + NOTE + " text);";
 
 	private static final String DATABASE_DROP = "DROP TABLE IF EXISTS "
 			+ DATABASE_TABLE;
@@ -133,9 +132,21 @@ public class NbnDbAdapter implements BaseColumns {
 		return mCursor;
 	}
 
+	/**
+	 * Return a Cursor positioned at the defined table
+	 */
+	public Cursor fetchLastNews(int type) throws SQLException {
+		Cursor mCursor = mDb.query(true, DATABASE_TABLE, getNewsColumns(), TYPE
+				+ "=" + type, null, null, null, START, null);
+		if (mCursor != null) {
+			mCursor.moveToLast();
+		}
+		return mCursor;
+	}
+
 	public static String[] getNewsColumns() {
-		return new String[] { _ID, TYPE, START, STOP, BREAST, BOTTLE, SIDE, OZ,
-				WET, DIRTY, NOTE };
+		return new String[] { _ID, TYPE, START, STOP, SIDE, AMT, WET, DIRTY,
+				MEDS, NOTE };
 	}
 
 	public static String[] getNewsListColumns() {
@@ -155,12 +166,11 @@ public class NbnDbAdapter implements BaseColumns {
 		values.put(TYPE, news.type);
 		values.put(START, news.start);
 		values.put(STOP, news.stop);
-		values.put(BREAST, news.breast);
-		values.put(BOTTLE, news.bottle);
 		values.put(SIDE, news.side);
-		values.put(OZ, news.oz);
+		values.put(AMT, news.amt);
 		values.put(WET, news.wet);
 		values.put(DIRTY, news.dirty);
+		values.put(MEDS, news.meds);
 		values.put(NOTE, news.note);
 		return values;
 	}
