@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
-import android.widget.SimpleCursorAdapter.CursorToStringConverter;
+import android.widget.SimpleCursorAdapter.ViewBinder;
 
 import com.steelbison.nbn.dao.NbnDbAdapter;
 import com.steelbison.nbn.dao.News;
@@ -30,10 +30,8 @@ public class NewbornNewsActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		mDateFormat = android.text.format.DateFormat
-				.getDateFormat(getApplicationContext());
-		mTimeFormat = android.text.format.DateFormat
-				.getTimeFormat(getApplicationContext());
+		mDateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
+		mTimeFormat = android.text.format.DateFormat.getTimeFormat(getApplicationContext());
 
 		this.getListView().setDividerHeight(2);
 		dbHelper = new NbnDbAdapter(this);
@@ -74,42 +72,34 @@ public class NewbornNewsActivity extends ListActivity {
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
-		Intent i;
+		Intent intent;
 		// switch on news type
-		int type = Integer.parseInt(((TextView) v.findViewById(R.id.type))
-				.getText().toString());
-		switch (type) {
-		case News.EAT:
-			i = new Intent(this, BabyEatActivity.class);
-			break;
-		case News.SLEEP:
-			i = new Intent(this, BabySleepActivity.class);
-			break;
-		case News.POOP:
-			i = new Intent(this, BabyPoopActivity.class);
-			break;
-		case News.MEDS:
-			i = new Intent(this, MomMedsActivity.class);
-			break;
-		case News.PUMP:
-			i = new Intent(this, MomPumpActivity.class);
-			break;
-		default:
-			i = new Intent();
+		String type = ((TextView) v.findViewById(R.id.type)).getText().toString();
+		if (type.equals(News.getTypeAsString(News.EAT))) {
+			intent = new Intent(this, BabyEatActivity.class);
+		} else if (type.equals(News.getTypeAsString(News.SLEEP))) {
+			intent = new Intent(this, BabySleepActivity.class);
+		} else if (type.equals(News.getTypeAsString(News.POOP))) {
+			intent = new Intent(this, BabyPoopActivity.class);
+		} else if (type.equals(News.getTypeAsString(News.MEDS))) {
+			intent = new Intent(this, MomMedsActivity.class);
+		} else if (type.equals(News.getTypeAsString(News.PUMP))) {
+			intent = new Intent(this, MomPumpActivity.class);
+		} else {
+			intent = new Intent();
 		}
 
-		i.putExtra(NbnDbAdapter._ID, id);
+		intent.putExtra(NbnDbAdapter._ID, id);
 
 		// Activity returns an result if called with startActivityForResult
-		startActivityForResult(i, ACTIVITY_EDIT);
+		startActivityForResult(intent, ACTIVITY_EDIT);
 	}
 
 	// Called with the result of the other activity requestCode was the origin
 	// request code send to the activity resultCode is the return code, 0 is
 	// everything is ok intend can be use to get some data from the caller
 	@Override
-	protected void onActivityResult(int requestCode, int resultCode,
-			Intent intent) {
+	protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		super.onActivityResult(requestCode, resultCode, intent);
 		fillData();
 	}
@@ -122,20 +112,36 @@ public class NewbornNewsActivity extends ListActivity {
 		int[] to = new int[] { R.id.type, R.id.start, R.id.stop, R.id.note };
 
 		// Now create an array adapter and set it to display using our rows
-		SimpleCursorAdapter sca = new SimpleCursorAdapter(this,
-				R.layout.log_row, cursor, from, to);
+		SimpleCursorAdapter sca = new SimpleCursorAdapter(this, R.layout.log_row, cursor, from, to);
 		setListAdapter(sca);
 
-		// Set the CursorToStringConverter, to provide the labels for the
-		// choices to be displayed in the TextView.
-		sca.setCursorToStringConverter(new CursorToStringConverter() {
-			public String convertToString(Cursor cursor) {
-				// Get the label for this row out of the "state" column
-				final long start = cursor.getLong(cursor
-						.getColumnIndex(NbnDbAdapter.START));
-				final String date = mDateFormat.format(start);
-				final String time = mTimeFormat.format(start);
-				return date + " " + time;
+		sca.setViewBinder(new ViewBinder() {
+			public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
+				switch (columnIndex) {
+				case 1:
+					int type = cursor.getInt(columnIndex);
+					String typeStr = News.getTypeAsString(type);
+					((TextView) view).setText(typeStr);
+					return true;
+				case 2:
+				case 3:
+					long dateTime = cursor.getLong(columnIndex);
+					if (dateTime > 0) {
+						String dateTimeStr;
+						if (columnIndex == 2) {
+							dateTimeStr = mDateFormat.format(dateTime) + " "
+									+ mTimeFormat.format(dateTime);
+						} else {
+							dateTimeStr = " - " + mTimeFormat.format(dateTime);
+						}
+						((TextView) view).setText(dateTimeStr);
+					} else {
+						((TextView) view).setText("");
+					}
+					return true;
+				default:
+					return false;
+				}
 			}
 		});
 	}

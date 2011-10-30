@@ -55,4 +55,21 @@ public class News {
 			Log.w(News.class.getName(), this.toString(), iae);
 		}
 	}
+
+	public static String getTypeAsString(int type) {
+		switch (type) {
+		case EAT:
+			return "Eat";
+		case SLEEP:
+			return "Sleep";
+		case POOP:
+			return "Poop";
+		case MEDS:
+			return "Meds";
+		case PUMP:
+			return "Pump";
+		default:
+			return "";
+		}
+	}
 }
