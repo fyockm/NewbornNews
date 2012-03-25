@@ -31,31 +31,29 @@ public class News {
 	public static final int RIGHT = 2;
 	public static final int BOTTLE = 3;
 
+	/*
+	 * Get all fields for a given cursor
+	 */
 	public void getNews(Cursor cursor) {
 		try {
 			id = cursor.getLong(cursor.getColumnIndexOrThrow(NbnDbAdapter._ID));
-			type = cursor.getInt(cursor
-					.getColumnIndexOrThrow(NbnDbAdapter.TYPE));
-			start = cursor.getLong(cursor
-					.getColumnIndexOrThrow(NbnDbAdapter.START));
-			stop = cursor.getLong(cursor
-					.getColumnIndexOrThrow(NbnDbAdapter.STOP));
-			side = cursor.getInt(cursor
-					.getColumnIndexOrThrow(NbnDbAdapter.SIDE));
-			amt = cursor.getFloat(cursor
-					.getColumnIndexOrThrow(NbnDbAdapter.AMT));
+			type = cursor.getInt(cursor.getColumnIndexOrThrow(NbnDbAdapter.TYPE));
+			start = cursor.getLong(cursor.getColumnIndexOrThrow(NbnDbAdapter.START));
+			stop = cursor.getLong(cursor.getColumnIndexOrThrow(NbnDbAdapter.STOP));
+			side = cursor.getInt(cursor.getColumnIndexOrThrow(NbnDbAdapter.SIDE));
+			amt = cursor.getFloat(cursor.getColumnIndexOrThrow(NbnDbAdapter.AMT));
 			wet = cursor.getInt(cursor.getColumnIndexOrThrow(NbnDbAdapter.WET)) > 0;
-			dirty = cursor.getInt(cursor
-					.getColumnIndexOrThrow(NbnDbAdapter.DIRTY)) > 0;
-			meds = cursor.getString(cursor
-					.getColumnIndexOrThrow(NbnDbAdapter.MEDS));
-			note = cursor.getString(cursor
-					.getColumnIndexOrThrow(NbnDbAdapter.NOTE));
+			dirty = cursor.getInt(cursor.getColumnIndexOrThrow(NbnDbAdapter.DIRTY)) > 0;
+			meds = cursor.getString(cursor.getColumnIndexOrThrow(NbnDbAdapter.MEDS));
+			note = cursor.getString(cursor.getColumnIndexOrThrow(NbnDbAdapter.NOTE));
 		} catch (IllegalArgumentException iae) {
 			Log.w(News.class.getName(), this.toString(), iae);
 		}
 	}
 
+	/*
+	 * Convert news type to a string
+	 */
 	public static String getTypeAsString(int type) {
 		switch (type) {
 		case EAT:

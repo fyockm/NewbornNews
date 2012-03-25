@@ -7,6 +7,9 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.TabHost;
 
+/*
+ * Parent activity for any of the Newborn News tab activites
+ */
 public class NbnTabActivity extends TabActivity {
 
 	protected Bundle extras;
@@ -28,8 +31,7 @@ public class NbnTabActivity extends TabActivity {
 		Intent intent = new Intent().setClass(this, actClass);
 		String title = res.getString(titleId);
 		Drawable draw = res.getDrawable(drawId);
-		tabHost.addTab(tabHost.newTabSpec(title).setIndicator(title, draw)
-				.setContent(intent));
+		tabHost.addTab(tabHost.newTabSpec(title).setIndicator(title, draw).setContent(intent));
 	}
 
 	protected void setCurrentTab() {

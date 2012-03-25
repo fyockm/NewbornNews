@@ -31,15 +31,12 @@ public class NbnDbAdapter implements BaseColumns {
 	public static final String MEDS = "meds";
 	public static final String NOTE = "note";
 
-	private static final String DATABASE_CREATE = "CREATE TABLE "
-			+ DATABASE_TABLE + " (" + _ID
-			+ " INTEGER primary key autoincrement, " + TYPE + " int not null,"
-			+ START + " int, " + STOP + " int, " + SIDE + " int, " + AMT
-			+ " dec, " + WET + " boolean, " + DIRTY + " boolean, " + MEDS
-			+ " text, " + NOTE + " text);";
+	private static final String DATABASE_CREATE = "CREATE TABLE " + DATABASE_TABLE + " (" + _ID
+			+ " INTEGER primary key autoincrement, " + TYPE + " int not null," + START + " int, "
+			+ STOP + " int, " + SIDE + " int, " + AMT + " dec, " + WET + " boolean, " + DIRTY
+			+ " boolean, " + MEDS + " text, " + NOTE + " text);";
 
-	private static final String DATABASE_DROP = "DROP TABLE IF EXISTS "
-			+ DATABASE_TABLE;
+	private static final String DATABASE_DROP = "DROP TABLE IF EXISTS " + DATABASE_TABLE;
 
 	// private static final String DEFAULT_SORT_ORDER = "modified DESC";
 
@@ -60,10 +57,9 @@ public class NbnDbAdapter implements BaseColumns {
 		 * increase the database version
 		 */
 		@Override
-		public void onUpgrade(SQLiteDatabase database, int oldVersion,
-				int newVersion) {
-			Log.w(TAG, "Upgrading database from version " + oldVersion + " to "
-					+ newVersion + ", which will destroy all old data");
+		public void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion) {
+			Log.w(TAG, "Upgrading database from version " + oldVersion + " to " + newVersion
+					+ ", which will destroy all old data");
 			database.execSQL(DATABASE_DROP);
 			onCreate(database);
 		}
@@ -99,8 +95,7 @@ public class NbnDbAdapter implements BaseColumns {
 	 */
 	public boolean updateNews(News news) {
 		ContentValues updateValues = createContentValues(news);
-		return mDb.update(DATABASE_TABLE, updateValues, _ID + "=" + news.id,
-				null) > 0;
+		return mDb.update(DATABASE_TABLE, updateValues, _ID + "=" + news.id, null) > 0;
 	}
 
 	/**
@@ -116,16 +111,15 @@ public class NbnDbAdapter implements BaseColumns {
 	 * @return Cursor over all news
 	 */
 	public Cursor fetchAllNews() {
-		return mDb.query(DATABASE_TABLE, getNewsColumns(), null, null, null,
-				null, null);
+		return mDb.query(DATABASE_TABLE, getNewsColumns(), null, null, null, null, null);
 	}
 
 	/**
 	 * Return a Cursor positioned at the defined table
 	 */
 	public Cursor fetchNews(long id) throws SQLException {
-		Cursor mCursor = mDb.query(true, DATABASE_TABLE, getNewsColumns(), _ID
-				+ "=" + id, null, null, null, null, null);
+		Cursor mCursor = mDb.query(true, DATABASE_TABLE, getNewsColumns(), _ID + "=" + id, null,
+				null, null, null, null);
 		if (mCursor != null) {
 			mCursor.moveToFirst();
 		}
@@ -136,8 +130,8 @@ public class NbnDbAdapter implements BaseColumns {
 	 * Return a Cursor positioned at the defined table
 	 */
 	public Cursor fetchLastNews(int type) throws SQLException {
-		Cursor mCursor = mDb.query(true, DATABASE_TABLE, getNewsColumns(), TYPE
-				+ "=" + type, null, null, null, START, null);
+		Cursor mCursor = mDb.query(true, DATABASE_TABLE, getNewsColumns(), TYPE + "=" + type, null,
+				null, null, START, null);
 		if (mCursor != null) {
 			mCursor.moveToLast();
 		}
@@ -145,8 +139,7 @@ public class NbnDbAdapter implements BaseColumns {
 	}
 
 	public static String[] getNewsColumns() {
-		return new String[] { _ID, TYPE, START, STOP, SIDE, AMT, WET, DIRTY,
-				MEDS, NOTE };
+		return new String[] { _ID, TYPE, START, STOP, SIDE, AMT, WET, DIRTY, MEDS, NOTE };
 	}
 
 	public static String[] getNewsListColumns() {
@@ -154,7 +147,7 @@ public class NbnDbAdapter implements BaseColumns {
 	}
 
 	/**
-	 * Create constant values
+	 * Create content values
 	 * 
 	 * @param category
 	 * @param summary

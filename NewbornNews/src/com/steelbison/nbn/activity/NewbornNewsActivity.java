@@ -9,12 +9,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-import android.widget.TextView;
 import android.widget.SimpleCursorAdapter.ViewBinder;
+import android.widget.TextView;
 
 import com.steelbison.nbn.dao.NbnDbAdapter;
 import com.steelbison.nbn.dao.News;
 
+/*
+ * Main activity for the Newborn News application
+ */
 public class NewbornNewsActivity extends ListActivity {
 
 	private NbnDbAdapter dbHelper;

@@ -30,6 +30,9 @@ public class DateTimeActivity extends Activity {
 	protected News mNews;
 	protected Long mRowId;
 
+	/*
+	 * Class for a combined Date Time Button
+	 */
 	protected class DateTimeButton {
 		public Button dateButton;
 		public Button timeButton;
@@ -78,17 +81,14 @@ public class DateTimeActivity extends Activity {
 	public void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
 
-		mDateFormat = android.text.format.DateFormat
-				.getDateFormat(getApplicationContext());
-		mTimeFormat = android.text.format.DateFormat
-				.getTimeFormat(getApplicationContext());
+		mDateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
+		mTimeFormat = android.text.format.DateFormat.getTimeFormat(getApplicationContext());
 
 		mDbAdapter = new NbnDbAdapter(this);
 		mDbAdapter.open();
 
 		Bundle extras = getIntent().getExtras();
-		mRowId = (bundle == null) ? null : (Long) bundle
-				.getSerializable(NbnDbAdapter._ID);
+		mRowId = (bundle == null) ? null : (Long) bundle.getSerializable(NbnDbAdapter._ID);
 		if (extras != null) {
 			mRowId = extras.getLong(NbnDbAdapter._ID);
 		}
@@ -135,8 +135,7 @@ public class DateTimeActivity extends Activity {
 
 	private DatePickerDialog getDatePickerDialog(final DateTimeButton dtb) {
 		DatePickerDialog.OnDateSetListener odsl = new DatePickerDialog.OnDateSetListener() {
-			public void onDateSet(DatePicker view, int year, int monthOfYear,
-					int dayOfMonth) {
+			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 				dtb.cal.set(year, monthOfYear, dayOfMonth);
 				dtb.setDateText();
 			}
@@ -153,7 +152,7 @@ public class DateTimeActivity extends Activity {
 				dtb.setTimeText();
 			}
 		};
-		return new TimePickerDialog(this, otsl, dtb.cal
-				.get(Calendar.HOUR_OF_DAY), dtb.cal.get(Calendar.MINUTE), false);
+		return new TimePickerDialog(this, otsl, dtb.cal.get(Calendar.HOUR_OF_DAY),
+				dtb.cal.get(Calendar.MINUTE), false);
 	}
 }
