@@ -38,7 +38,7 @@ public class NbnDbAdapter implements BaseColumns {
 
 	private static final String DATABASE_DROP = "DROP TABLE IF EXISTS " + DATABASE_TABLE;
 
-	// private static final String DEFAULT_SORT_ORDER = "modified DESC";
+	private static final String START_DESC = START + " DESC";
 
 	private static class NbnDbHelper extends SQLiteOpenHelper {
 
@@ -111,7 +111,7 @@ public class NbnDbAdapter implements BaseColumns {
 	 * @return Cursor over all news
 	 */
 	public Cursor fetchAllNews() {
-		return mDb.query(DATABASE_TABLE, getNewsColumns(), null, null, null, null, null);
+		return mDb.query(DATABASE_TABLE, getNewsColumns(), null, null, null, null, START_DESC);
 	}
 
 	/**
